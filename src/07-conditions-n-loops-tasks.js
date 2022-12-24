@@ -49,7 +49,8 @@ function getFizzBuzz(num) {
 function getFactorial(n) {
   if (n === 1) {
     return n;
-  } return n * getFactorial(n - 1);
+  }
+  return n * getFactorial(n - 1);
 }
 
 /**
@@ -89,8 +90,8 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  return a + b > c && a + c > b && b + c > a;
 }
 
 /**
@@ -125,8 +126,19 @@ function isTriangle(/* a, b, c */) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const rightRect1 = rect1.left + rect1.width;
+  const bottomRect1 = rect1.top + rect1.height;
+
+  const rightRect2 = rect2.left + rect2.width;
+  const bottomRect2 = rect2.top + rect2.height;
+
+  return (
+    rect1.left < rightRect2
+    && rightRect1 > rect2.left
+    && rect1.top < bottomRect2
+    && bottomRect1 > rect2.top
+  );
 }
 
 /**
@@ -170,8 +182,18 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const arr = str.split('');
+  const obj = arr.reduce((total, amount) => {
+    // eslint-disable-next-line no-param-reassign
+    total[amount] = (total[amount] || 0) + 1;
+    return total;
+  }, {});
+
+  const keyInd = Object.values(obj).indexOf(1);
+  const res = Object.keys(obj)[keyInd];
+
+  return res;
 }
 
 /**
